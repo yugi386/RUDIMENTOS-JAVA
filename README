@@ -1,0 +1,50 @@
+----------------------------------------
+RUDIMENTOS DO JAVA
+----------------------------------------
+
+Este repositório contem algumas rotinas primárias em java console.
+Foi um exercício de sala de aula num hipotético controle de uma oficina.
+
+[A] Cadastros:
+
+0 - Clientes.
+1 - Serviços.
+2 - Venda.
+3 - Itens da Venda.
+4 - Pagamento.
+
+[B] REQUISITOS:
+
+0 - Status da venda: Concluída, Cancelada.
+	Uma venda cancelada não pode ter seu Status retornado para concluído.
+
+1 - Saldo em aberto: cada venda concluída deve adicionar o toal da venda no saldo em aberto e subtrair do produto a quantidade vendida.
+	Cada venda cancelada deve subtrair o total da venda no saldo em aberto e adicionar no produto a quantidade vendida.
+	
+2 - Cliente: Cliente desativo não pode efetuar compra.
+	Cliente com saldo em aberto maior que 1000 não poderá efetuar compra.
+			 
+3 - Pagamento: para cada pagamento concluído deve-se subtrair do saldo em aberto do cliente.
+	para cada pagamento cancelado deve adicionar ao saldo em aberto do cliente.
+	
+4 - Status do pagamento: Concluído, cancelado.
+	Pagamento cancelado não poder etr seu status retornado para concluído.
+	
+5 - Produto: sem saldo não pode ser vendido.
+	Serviços não precisam controlar estoque.
+
+[C]	RELATÓRIOS:
+0) Clientes:
+	Cadastro
+	Saldos em aberto
+1) Vendas:	
+	por período
+	por cliente/período
+2) Pagamentos
+	por período
+	por cliente/período
+	
+OBS: BANCO DE DADOS MYSQL: oficina	
+	SCRIPT DAS TABELAS: oficina.sql
+				
+
