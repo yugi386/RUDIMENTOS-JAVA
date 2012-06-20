@@ -15,16 +15,16 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import br.webverissimo.cadastro.model.dao.produtoDAO;
-import br.webverissimo.cadastro.model.dto.produtoDTO;
+import br.webverissimo.cadastro.model.dao.ProdutoDAO;
+import br.webverissimo.cadastro.model.dto.ProdutoDTO;
 import br.webverissimo.cadastro.util.Keyboard;
 import br.webverissimo.cadastro.util.Util;
-import br.webverissimo.cadastro.util.formatar;
+import br.webverissimo.cadastro.util.Formatar;
 
 public class ProdutoUI {
 
-	produtoDAO produtoDAO = new produtoDAO();
-    produtoDTO produtoDTO = new produtoDTO();
+	ProdutoDAO produtoDAO = new ProdutoDAO();
+    ProdutoDTO produtoDTO = new ProdutoDTO();
 
     int tela = 120;
     int largura = 120;
@@ -39,21 +39,21 @@ public class ProdutoUI {
             Util.titulo("Lista de Produtos e Serviços", tela, largura);
         
         	for (int ct=0;ct<5;ct++) {
-        		Util.cabecalho(formatar.produto_campos()[ct],formatar.produto_tam()[ct],0);
+        		Util.cabecalho(Formatar.produto_campos()[ct],Formatar.produto_tam()[ct],0);
         	}
         	
         	Util.writeln("", 0);
     		Util.line("-", largura);
             Iterator<Object> produtos = listaProdutos.iterator();
             while ( produtos.hasNext() ) {
-                produtoDTO = (produtoDTO)produtos.next();
+                produtoDTO = (ProdutoDTO)produtos.next();
                 
                 // mostrando dados dos registros
-                Util.corpo(produtoDTO.getId()+"",formatar.produto_tam()[0],0);		
-                Util.corpo(produtoDTO.getTipo(),formatar.produto_tam()[1],0);
-                Util.corpo(produtoDTO.getDescricao(),formatar.produto_tam()[2],0);	
-                Util.corpo(produtoDTO.getSaldo_atual()+"",formatar.produto_tam()[3],0);
-                Util.corpo(produtoDTO.getPreco()+"",formatar.produto_tam()[4],1);
+                Util.corpo(produtoDTO.getId()+"",Formatar.produto_tam()[0],0);		
+                Util.corpo(produtoDTO.getTipo(),Formatar.produto_tam()[1],0);
+                Util.corpo(produtoDTO.getDescricao(),Formatar.produto_tam()[2],0);	
+                Util.corpo(produtoDTO.getSaldo_atual()+"",Formatar.produto_tam()[3],0);
+                Util.corpo(produtoDTO.getPreco()+"",Formatar.produto_tam()[4],1);
                 
             }
             Util.voltar(tela, largura);

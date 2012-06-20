@@ -13,13 +13,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import br.webverissimo.cadastro.model.dao.clienteDAO;
+import br.webverissimo.cadastro.model.dao.ClienteDAO;
 import br.webverissimo.cadastro.util.Database;
 
 
 // ***************************************************************************************
 
-public class relatDAO {
+public class RelatDAO {
 	
 	 private Database database=new Database();
 	
@@ -33,7 +33,7 @@ public class relatDAO {
     ResultSet rs = database.getConnection().createStatement().executeQuery(sql);
     List<Object> listaCliente = new ArrayList<Object>();
     
-    clienteDAO clienteDAO = new clienteDAO();
+    ClienteDAO clienteDAO = new ClienteDAO();
     while ( rs.next()){
         listaCliente.add( clienteDAO.preencherClienteDTO(rs)  );
     }

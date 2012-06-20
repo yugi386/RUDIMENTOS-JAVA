@@ -10,7 +10,7 @@
 
 package br.webverissimo.cadastro.model.dto;
 
-public class itensDTO {
+public class ItensDTO {
 
 	private int id;
 	private int venda_id;

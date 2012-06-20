@@ -10,7 +10,7 @@
 
 package br.webverissimo.cadastro.util;
 
-public class formatar {
+public class Formatar {
 
 	// RÓTULOS DA TABELA CLIENTE:
 	public static String[] cliente_campos() {

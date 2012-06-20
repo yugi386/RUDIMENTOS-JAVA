@@ -15,12 +15,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import br.webverissimo.cadastro.model.dto.itensDTO;
-import br.webverissimo.cadastro.model.dto.vendaDTO;
+import br.webverissimo.cadastro.model.dto.ItensDTO;
+import br.webverissimo.cadastro.model.dto.VendaDTO;
 import br.webverissimo.cadastro.util.Database;
 import br.webverissimo.cadastro.util.Util;
 
-public class vendaDAO {
+public class VendaDAO {
 
 	private Database database=new Database();
 
@@ -74,9 +74,9 @@ public List<Object> listar(String dataini, String datafim, int cliente) throws S
 	    }	    
  //*************************************************************************************
  // PREENCHE A LISTA COM DADOS DAS VENDAS
-	    private vendaDTO preencherVendaDTO(ResultSet rs) throws SQLException {
+	    private VendaDTO preencherVendaDTO(ResultSet rs) throws SQLException {
 	       
-	       vendaDTO vendaDTO = new vendaDTO();	//	instância DTO
+	       VendaDTO vendaDTO = new VendaDTO();	//	instância DTO
 	       
 	       vendaDTO.setId(rs.getInt("id"));
 	       vendaDTO.setCliente_id(rs.getInt("cliente_id"));
@@ -90,7 +90,7 @@ public List<Object> listar(String dataini, String datafim, int cliente) throws S
 	    
 //*************************************************************************************
 //  // PREENCHE A LISTA COM DADOS DOS ITENS DAS VENDAS 
-public List<itensDTO> itens_venda(int id) throws SQLException{
+public List<ItensDTO> itens_venda(int id) throws SQLException{
 	    	
    String sql = "select id, produto_id, quant from itens where venda_id = ?";
 	        
@@ -98,11 +98,11 @@ public List<itensDTO> itens_venda(int id) throws SQLException{
 	        pstmt.setInt(1, id);	//	coloca o código da venda
 	        ResultSet rs = pstmt.executeQuery();
 	        
-	        itensDTO itensDTO = null;	//	instancia o objeto de itens da venda
-	        List<itensDTO> listaitens = new ArrayList<itensDTO>();
+	        ItensDTO itensDTO = null;	//	instancia o objeto de itens da venda
+	        List<ItensDTO> listaitens = new ArrayList<ItensDTO>();
 	        
 	        while( rs.next()){
-	        	itensDTO = new itensDTO();
+	        	itensDTO = new ItensDTO();
 	        	// preenchedo itens da venda
 	            itensDTO.setId(rs.getInt("id"));
 	            itensDTO.setProduto_id(rs.getInt("produto_id"));
@@ -121,7 +121,7 @@ public List<itensDTO> itens_venda(int id) throws SQLException{
  //*************************************************************************************
  // METODO DE INCLUSÃO DE VENDAS
 	    
-  public void incluir(vendaDTO vendaDTO) throws SQLException {
+  public void incluir(VendaDTO vendaDTO) throws SQLException {
 	   	
 	// insere a venda:
 
@@ -139,7 +139,7 @@ public List<itensDTO> itens_venda(int id) throws SQLException{
     pstmt.close();
     
     // colocando a conta para o cliente:
-    clienteDAO cli = new clienteDAO();
+    ClienteDAO cli = new ClienteDAO();
     cli.alterarSaldo(vendaDTO.getCliente_id(),vendaDTO.getTotal(),1);  // tipo = 1 compra
     
  }
@@ -148,7 +148,7 @@ public List<itensDTO> itens_venda(int id) throws SQLException{
 	//*************************************************************************************
 	// EXCLUSÃO DE ITENS DA VENDA - só exclui vendas canceladas!
 
-    public boolean excluir(vendaDTO vendaDTO) throws SQLException {
+    public boolean excluir(VendaDTO vendaDTO) throws SQLException {
 	    
     	String ret = VerificaVendaCancelada(vendaDTO.getId()).trim(); // Verifica se a venda está cancelada!!! 
     	
@@ -160,8 +160,8 @@ public List<itensDTO> itens_venda(int id) throws SQLException{
 	       pstmt.executeUpdate();
 	       pstmt.close();
 	       
-	       itensDAO itensDAO = null;	//	instancia o objeto para gravacao do itens
-	   	   itensDAO = new itensDAO();
+	       ItensDAO itensDAO = null;	//	instancia o objeto para gravacao do itens
+	   	   itensDAO = new ItensDAO();
 	   	
 	   	   itensDAO.excluir(vendaDTO.getId());	//	excluindo itens desta venda
 	   	   return true;
@@ -221,7 +221,7 @@ public boolean CancelarVenda(int id) throws SQLException {
         }
         rs.close();  
         
-        clienteDAO cli = new clienteDAO();
+        ClienteDAO cli = new ClienteDAO();
         cli.alterarSaldo(cli_id,tot,2);  // tipo = 2 cancelamento
       
         // devolvendo itens para o estoque:
@@ -230,7 +230,7 @@ public boolean CancelarVenda(int id) throws SQLException {
         pstmt.setInt(1, id);  
         rs = pstmt.executeQuery();
        
-        produtoDAO prod = new produtoDAO();
+        ProdutoDAO prod = new ProdutoDAO();
         while ( rs.next()){
            prod.alterarQuant(rs.getInt("produto_id"),  rs.getDouble("quant"),2); // tipo 2 = devolve produto para estoque
         }

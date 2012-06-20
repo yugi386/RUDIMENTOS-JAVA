@@ -10,7 +10,7 @@
 
 package br.webverissimo.cadastro.model.dto;
 
-public class clienteDTO {
+public class ClienteDTO {
 
 	private int id;
 	private String razao_social;

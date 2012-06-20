@@ -12,17 +12,17 @@ package br.webverissimo.cadastro.model.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import br.webverissimo.cadastro.model.dto.itensDTO;
+import br.webverissimo.cadastro.model.dto.ItensDTO;
 import br.webverissimo.cadastro.util.Database;
 
-public class itensDAO {
+public class ItensDAO {
 
     private Database database=new Database();
 
  //*************************************************************************************
  // METODO DE INCLUSÃO DE ITENS DE VENDA
  
-    public void incluir(itensDTO itensDTO) throws SQLException {
+    public void incluir(ItensDTO itensDTO) throws SQLException {
    	
         String sql = "insert into itens (id, venda_id, produto_id, quant) values (null,?,?,?)";
                 
@@ -36,7 +36,7 @@ public class itensDAO {
         pstmt.close();
         
         // dando baixa no estoque
-        produtoDAO prod = new produtoDAO();
+        ProdutoDAO prod = new ProdutoDAO();
         prod.alterarQuant(itensDTO.getProduto_id(),  itensDTO.getQuant(),1); // tipo 1 = baixa no estoque
         
     }

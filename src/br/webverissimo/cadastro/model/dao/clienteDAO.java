@@ -9,7 +9,7 @@
  */
 
 package br.webverissimo.cadastro.model.dao;
-import br.webverissimo.cadastro.model.dto.clienteDTO;
+import br.webverissimo.cadastro.model.dto.ClienteDTO;
 import br.webverissimo.cadastro.util.Database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class clienteDAO {
+public class ClienteDAO {
 
     private Database database=new Database();
 
@@ -43,7 +43,7 @@ public class clienteDAO {
        
     public Object preencherClienteDTO(ResultSet rs) throws SQLException {
        
-       clienteDTO clienteDTO = new clienteDTO();	//	instância DTO
+       ClienteDTO clienteDTO = new ClienteDTO();	//	instância DTO
        
        clienteDTO.setId(rs.getInt("id"));
        clienteDTO.setRazao_social(rs.getString("razao_social"));
@@ -63,7 +63,7 @@ public class clienteDAO {
  //*************************************************************************************
  // METODO DE INCLUSÃO DE CLIENTES
     
-    public void incluir(clienteDTO clienteDTO) throws SQLException {
+    public void incluir(ClienteDTO clienteDTO) throws SQLException {
    	
         String sql = "insert into cliente ("  
                 + "id, razao_social, endereco, complemento, bairro, cidade, estado, cep, tel, saldo_aberto, ativo) "
@@ -92,7 +92,7 @@ public class clienteDAO {
 //*************************************************************************************
 // EXCLUSÃO DE CLIENTES
 
-    public void excluir(clienteDTO clienteDTO) throws SQLException {
+    public void excluir(ClienteDTO clienteDTO) throws SQLException {
        String sql = "delete from cliente where id = ?";
        PreparedStatement pstmt = database.getConnection().prepareStatement(sql);
        pstmt.setInt(1,  clienteDTO.getId());
@@ -103,7 +103,7 @@ public class clienteDAO {
 
 
  // *************************************************************************************
-    public void alterar(clienteDTO clienteDTO) throws SQLException {
+    public void alterar(ClienteDTO clienteDTO) throws SQLException {
     	
         String sql = "update cliente set razao_social=?, endereco=?, complemento=?, bairro=?,"
                 + "  cidade=? , estado=?, cep=?, tel=?, saldo_aberto=?, ativo=?  where id =?";

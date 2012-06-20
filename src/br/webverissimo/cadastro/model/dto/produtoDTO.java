@@ -9,7 +9,7 @@
  */
 package br.webverissimo.cadastro.model.dto;
 
-public class produtoDTO {
+public class ProdutoDTO {
 
 	private int id;
 	private String descricao;

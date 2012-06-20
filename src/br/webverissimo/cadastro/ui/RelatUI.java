@@ -12,18 +12,18 @@ package br.webverissimo.cadastro.ui;
 
 import java.sql.SQLException;
 import java.util.List;
-import br.webverissimo.cadastro.model.dao.clienteDAO;
-import br.webverissimo.cadastro.model.dao.pagDAO;
-import br.webverissimo.cadastro.model.dao.relatDAO;
-import br.webverissimo.cadastro.model.dao.vendaDAO;
-import br.webverissimo.cadastro.model.dto.clienteDTO;
+import br.webverissimo.cadastro.model.dao.ClienteDAO;
+import br.webverissimo.cadastro.model.dao.PagDAO;
+import br.webverissimo.cadastro.model.dao.RelatDAO;
+import br.webverissimo.cadastro.model.dao.VendaDAO;
+import br.webverissimo.cadastro.model.dto.ClienteDTO;
 import br.webverissimo.cadastro.util.Keyboard;
 import br.webverissimo.cadastro.util.Util;
 
 public class RelatUI {
 
-	 clienteDAO clienteDAO = new clienteDAO();
-	 clienteDTO clienteDTO = new clienteDTO();
+	 ClienteDAO clienteDAO = new ClienteDAO();
+	 ClienteDTO clienteDTO = new ClienteDTO();
 	 int tela = 70;
 	 int largura = 70;
 
@@ -36,7 +36,7 @@ public class RelatUI {
 // **************************************************************************************************	 
 // cliente com saldo em aberto.
 public void cliente_saldo() {
-    	relatDAO relatDAO = new relatDAO();
+    	RelatDAO relatDAO = new RelatDAO();
         List<Object> listaClientes = null;
 		try {
 			listaClientes = relatDAO.lista_cliSaldo();
@@ -64,7 +64,7 @@ public void venda_periodo() throws SQLException{
     int cliente = 0;
     
     // Pegando dados:
-    vendaDAO venda = new vendaDAO();
+    VendaDAO venda = new VendaDAO();
     List<Object> lista;
     VendaUI mostra = new VendaUI();
     lista = venda.listar(dataini, datafim, cliente);
@@ -88,7 +88,7 @@ public void venda_periodo_cliente() throws SQLException{
     datafim = Keyboard.readString();
     
  // Pegando dados:
-    vendaDAO venda = new vendaDAO();
+    VendaDAO venda = new VendaDAO();
     List<Object> lista;
     VendaUI mostra = new VendaUI();
     lista = venda.listar(dataini, datafim, cliente);
@@ -112,9 +112,9 @@ public void pag_periodo_cliente() throws SQLException{
 	datafim = Keyboard.readString();
 	 
 	//Pegando dados:
-	pagDAO pag = new pagDAO();
+	PagDAO pag = new PagDAO();
 	List<Object> lista;
-	pagUI mostra = new pagUI();
+	PagUI mostra = new PagUI();
 	lista = pag.listar(dataini, datafim, cliente);
 	mostra.listar2(lista,2);
 
@@ -133,9 +133,9 @@ public void pag_periodo() throws SQLException{
 	datafim = Keyboard.readString();
 	
 	// Pegando dados:
-	pagDAO pag = new pagDAO();
+	PagDAO pag = new PagDAO();
 	List<Object> lista;
-	pagUI mostra = new pagUI();
+	PagUI mostra = new PagUI();
 	lista = pag.listar(dataini, datafim, 0);
 	mostra.listar2(lista,1);
 

@@ -13,14 +13,14 @@ package br.webverissimo.cadastro.model.dto;
 import java.util.Date;
 import java.util.List;
 
-public class vendaDTO {
+public class VendaDTO {
 
 	private int id;
 	private int cliente_id;
 	private Date data_venda;
 	private String status;
 	private double total;
-	private List<itensDTO> itens;
+	private List<ItensDTO> itens;
 	
 	public int getId() {
 		return id;
@@ -52,10 +52,10 @@ public class vendaDTO {
 	public void setTotal(double d) {
 		this.total = d;
 	}
-	public List<itensDTO> getItens() {
+	public List<ItensDTO> getItens() {
 		return itens;
 	}
-	public void setItens(List<itensDTO> itens) {
+	public void setItens(List<ItensDTO> itens) {
 		this.itens = itens;
 	}
 	

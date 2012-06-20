@@ -12,21 +12,21 @@ package br.webverissimo.cadastro.ui;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
-import br.webverissimo.cadastro.model.dao.clienteDAO;
-import br.webverissimo.cadastro.model.dao.itensDAO;
-import br.webverissimo.cadastro.model.dao.produtoDAO;
-import br.webverissimo.cadastro.model.dao.vendaDAO;
-import br.webverissimo.cadastro.model.dto.itensDTO;
-import br.webverissimo.cadastro.model.dto.produtoDTO;
-import br.webverissimo.cadastro.model.dto.vendaDTO;
+import br.webverissimo.cadastro.model.dao.ClienteDAO;
+import br.webverissimo.cadastro.model.dao.ItensDAO;
+import br.webverissimo.cadastro.model.dao.ProdutoDAO;
+import br.webverissimo.cadastro.model.dao.VendaDAO;
+import br.webverissimo.cadastro.model.dto.ItensDTO;
+import br.webverissimo.cadastro.model.dto.ProdutoDTO;
+import br.webverissimo.cadastro.model.dto.VendaDTO;
 import br.webverissimo.cadastro.util.Keyboard;
 import br.webverissimo.cadastro.util.Util;
-import br.webverissimo.cadastro.util.formatar;
+import br.webverissimo.cadastro.util.Formatar;
 
 public class VendaUI {
 
-	vendaDAO vendaDAO = new vendaDAO();
-    vendaDTO vendaDTO = new vendaDTO();
+	VendaDAO vendaDAO = new VendaDAO();
+    VendaDTO vendaDTO = new VendaDTO();
     int tela = 70;
     int largura = 70;
 
@@ -54,7 +54,7 @@ public class VendaUI {
 		
 		// Mostrando Cabeçalho VENDAS: código, Código do Cliente, Data da Venda, Status, Total  
 		for (int ct=0;ct<5;ct++){
-			Util.cabecalho(formatar.venda_campos()[ct],formatar.venda_tam()[ct],0);
+			Util.cabecalho(Formatar.venda_campos()[ct],Formatar.venda_tam()[ct],0);
 		}
 		
 		System.out.println("");
@@ -86,18 +86,18 @@ public class VendaUI {
 // MOSTRA NA TELA DADOS DA VENDA E SEUS ITENS    
 	private void imprimirItens(int largura, Iterator<Object> produtos) {
 		while ( produtos.hasNext() ) {
-		    vendaDTO = (vendaDTO)produtos.next();
+		    vendaDTO = (VendaDTO)produtos.next();
 		    
 		    // mostrando dados dos registros
-		    Util.corpo(vendaDTO.getId()+"",formatar.venda_tam()[0],0);			
-		    Util.corpo(vendaDTO.getCliente_id()+"",formatar.venda_tam()[1],0);	
-		    Util.corpo(vendaDTO.getData_venda()+"",formatar.venda_tam()[2],0);
-		    Util.corpo(vendaDTO.getStatus(),formatar.venda_tam()[3],0);
-		    Util.corpo(vendaDTO.getTotal()+"",formatar.venda_tam()[4],1);
+		    Util.corpo(vendaDTO.getId()+"",Formatar.venda_tam()[0],0);			
+		    Util.corpo(vendaDTO.getCliente_id()+"",Formatar.venda_tam()[1],0);	
+		    Util.corpo(vendaDTO.getData_venda()+"",Formatar.venda_tam()[2],0);
+		    Util.corpo(vendaDTO.getStatus(),Formatar.venda_tam()[3],0);
+		    Util.corpo(vendaDTO.getTotal()+"",Formatar.venda_tam()[4],1);
 		    
 		    int tam = vendaDTO.getItens().size();
 		    int recuo = 12;
-		    itensDTO ItemDTO=null;
+		    ItensDTO ItemDTO=null;
 		    
 		    for (int ct=0;ct<tam;ct++) {
 		    	ItemDTO = vendaDTO.getItens().get(ct); 
@@ -129,7 +129,7 @@ public class VendaUI {
     	Util.write("Digite o ID do Cliente: ",0);
         vendaDTO.setCliente_id(Keyboard.readInt());
 
-        clienteDAO cli = new clienteDAO();
+        ClienteDAO cli = new ClienteDAO();
         if (cli.VerificaCliente(vendaDTO.getCliente_id()) != 1) {
         	Util.writeln("Cliente não está habilitado para compra!", 1);		  
         	return;
@@ -143,14 +143,14 @@ public class VendaUI {
         // lendo itens da venda:
         Double tot = 0.0;			//	Total da Venda
         // instancia produtos:
-        produtoDAO produto = new produtoDAO();
-        produtoDTO produtoDTO = new produtoDTO();
+        ProdutoDAO produto = new ProdutoDAO();
+        ProdutoDTO produtoDTO = new ProdutoDTO();
         // instancia itens
-        itensDAO itensDAO = new itensDAO();
+        ItensDAO itensDAO = new ItensDAO();
         
         while (true) {
         	char continua = 'N';
-            itensDTO itensDTO = new itensDTO();
+            ItensDTO itensDTO = new ItensDTO();
             
             itensDTO.setVenda_id(vendaDTO.getId());		//	codigo da venda
             

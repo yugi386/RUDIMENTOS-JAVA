@@ -11,7 +11,7 @@ package br.webverissimo.cadastro.model.dto;
 
 import java.util.Date;
 
-public class pagDTO {
+public class PagDTO {
 	
 	private int id;
 	private Date data_pag;

@@ -16,10 +16,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.webverissimo.cadastro.model.dto.produtoDTO;
+import br.webverissimo.cadastro.model.dto.ProdutoDTO;
 import br.webverissimo.cadastro.util.Database;
 
-public class produtoDAO {
+public class ProdutoDAO {
 
     private Database database=new Database();
 
@@ -43,7 +43,7 @@ public class produtoDAO {
        
     private Object preencherProdutoDTO(ResultSet rs) throws SQLException {
        
-       produtoDTO produtoDTO = new produtoDTO();	//	instância DTO
+       ProdutoDTO produtoDTO = new ProdutoDTO();	//	instância DTO
        
        produtoDTO.setId(rs.getInt("id"));
        produtoDTO.setTipo(rs.getString("tipo"));
@@ -57,7 +57,7 @@ public class produtoDAO {
  //*************************************************************************************
  // METODO DE INCLUSÃO DE PRODUTOS
     
-    public void incluir(produtoDTO produtoDTO) throws SQLException {
+    public void incluir(ProdutoDTO produtoDTO) throws SQLException {
    	
         String sql = "insert into produto ("  
                 + "id, tipo, descricao, saldo_atual, preco) "
@@ -80,7 +80,7 @@ public class produtoDAO {
 //*************************************************************************************
 // EXCLUSÃO DE PRODUTOS
 
-    public void excluir(produtoDTO produtoDTO) throws SQLException {
+    public void excluir(ProdutoDTO produtoDTO) throws SQLException {
        String sql = "delete from produto where id = ?";
        PreparedStatement pstmt = database.getConnection().prepareStatement(sql);
        pstmt.setInt(1,  produtoDTO.getId());
@@ -91,7 +91,7 @@ public class produtoDAO {
 
 
  // *************************************************************************************
-    public void alterar(produtoDTO produtoDTO) throws SQLException {
+    public void alterar(ProdutoDTO produtoDTO) throws SQLException {
     	
         String sql = "update produto set descricao=?, tipo=?, saldo_atual=?, preco=?  where id =?";
         
@@ -110,7 +110,7 @@ public class produtoDAO {
     
 // ***************************************************************************************
 // procura o preço de um produto e verifica se o quantidade é suficiente para a venda    
-    public produtoDTO ProcuraPreco(int id, double quant) throws SQLException {
+    public ProdutoDTO ProcuraPreco(int id, double quant) throws SQLException {
 
         String sql = "select preco, saldo_atual, tipo from produto where id = ?";
 
@@ -118,7 +118,7 @@ public class produtoDAO {
         pstmt.setInt(1, id);  
         ResultSet rs = pstmt.executeQuery();
                 
-        produtoDTO Produto = new produtoDTO();
+        ProdutoDTO Produto = new ProdutoDTO();
         // lendo preco do produto ou servico - atenção: servico tem saldo atual sempre zero
         while ( rs.next()){
         	if ( rs.getDouble("saldo_atual") >= quant || rs.getString("tipo").equals("S")) {

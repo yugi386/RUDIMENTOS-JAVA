@@ -14,17 +14,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import br.webverissimo.cadastro.model.dao.pagDAO;
-import br.webverissimo.cadastro.model.dao.vendaDAO;
-import br.webverissimo.cadastro.model.dto.pagDTO;
+import br.webverissimo.cadastro.model.dao.PagDAO;
+import br.webverissimo.cadastro.model.dao.VendaDAO;
+import br.webverissimo.cadastro.model.dto.PagDTO;
 import br.webverissimo.cadastro.util.Keyboard;
 import br.webverissimo.cadastro.util.Util;
-import br.webverissimo.cadastro.util.formatar;
+import br.webverissimo.cadastro.util.Formatar;
 
-public class pagUI {
+public class PagUI {
 
-	pagDAO pagDAO = new pagDAO();
-    pagDTO pagDTO = new pagDTO();
+	PagDAO pagDAO = new PagDAO();
+    PagDTO pagDTO = new PagDTO();
     int tela = 83;
 	int largura = 83;
 	
@@ -51,13 +51,13 @@ public class pagUI {
 	private void apresentaPag(List<Object> listaPag, int tipo ) {
 		Iterator<Object> produtos = listaPag.iterator();
       
-		int[] formata = formatar.pag_tam();
+		int[] formata = Formatar.pag_tam();
 		if (tipo == 2) {
-			formata = formatar.pagCli_tam();
+			formata = Formatar.pagCli_tam();
 		}
 		
 		while ( produtos.hasNext() ) {
-		    pagDTO = (pagDTO)produtos.next();
+		    pagDTO = (PagDTO)produtos.next();
 		    
 		    // mostrando dados dos registros
 		    Util.corpo(pagDTO.getId()+"",formata[0],0);			
@@ -78,7 +78,7 @@ public class pagUI {
     	if (tipo == 1) {	
 	    	Util.titulo("Lista de Pagamentos por período", tela, largura);
 			for (int ct=0;ct<6;ct++){
-				Util.cabecalho(formatar.pag_campos()[ct],formatar.pag_tam()[ct],0);	
+				Util.cabecalho(Formatar.pag_campos()[ct],Formatar.pag_tam()[ct],0);	
 			}
 			Util.writeln("", 0);
 			Util.line("=", largura);
@@ -89,7 +89,7 @@ public class pagUI {
     		int largura = 94;	
     		Util.titulo("Lista de Pagamentos por Cliente + Periodo", tela, largura);
 			for (int ct=0;ct<6;ct++){
-				Util.cabecalho(formatar.pagCli_campos()[ct],formatar.pagCli_tam()[ct],0);	
+				Util.cabecalho(Formatar.pagCli_campos()[ct],Formatar.pagCli_tam()[ct],0);	
 			}
 			Util.writeln("", 0);
 			Util.line("=", largura);
@@ -106,7 +106,7 @@ public class pagUI {
     	
     	Util.write("Digite o ID da Venda: ",0);	//	nao sera auto-incremento
         pagDTO.setVenda_id(Keyboard.readInt());
-        vendaDAO vendaDAO = new vendaDAO();
+        VendaDAO vendaDAO = new VendaDAO();
         
         if ( vendaDAO.VerificaVendaExistente(pagDTO.getVenda_id()) == 0 ) {
         	Util.writeln("Venda inexistente!", 1);		  

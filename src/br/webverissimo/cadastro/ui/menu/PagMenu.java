@@ -13,7 +13,7 @@ package br.webverissimo.cadastro.ui.menu;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import br.webverissimo.cadastro.ui.pagUI;
+import br.webverissimo.cadastro.ui.PagUI;
 import br.webverissimo.cadastro.util.Keyboard;
 import br.webverissimo.cadastro.util.Util;
 
@@ -30,7 +30,7 @@ public class PagMenu {
 //*************************************************************************************
     private void apresentar() throws SQLException {
 
-        pagUI pagUI = new pagUI();
+        PagUI pagUI = new PagUI();
 
         int opc = 0;
         String[] MenuOpc = {"Efetuar Pagamento","Cancelar Pagamento","Listar Pagamento","Excluir Pagamento"};

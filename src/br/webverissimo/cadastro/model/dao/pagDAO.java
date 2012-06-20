@@ -15,11 +15,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.webverissimo.cadastro.model.dto.pagDTO;
+import br.webverissimo.cadastro.model.dto.PagDTO;
 import br.webverissimo.cadastro.util.Database;
 import br.webverissimo.cadastro.util.Util;
 
-public class pagDAO {
+public class PagDAO {
 
 	private Database database=new Database();
 
@@ -79,9 +79,9 @@ public List<Object> listar(String dataini, String datafim, int cliente) throws S
 	    
  //*************************************************************************************
 //PREENCHE A LISTA DE PAGAMENTOS POR PERIODO
-	    private pagDTO preencherPagDTO(ResultSet rs) throws SQLException {
+	    private PagDTO preencherPagDTO(ResultSet rs) throws SQLException {
 	       
-	       pagDTO pagDTO = new pagDTO();		//	instância DTO
+	       PagDTO pagDTO = new PagDTO();		//	instância DTO
 	       
 	       pagDTO.setId(rs.getInt("id"));
 	       pagDTO.setData_pag(rs.getDate("data_pag"));
@@ -95,9 +95,9 @@ public List<Object> listar(String dataini, String datafim, int cliente) throws S
 
  //*************************************************************************************
 // PREENCHE A LISTA DE PAGAMENTOS POR PERIODO + CLIENTE	    
-	    private pagDTO preencherPagDTO2(ResultSet rs) throws SQLException {
+	    private PagDTO preencherPagDTO2(ResultSet rs) throws SQLException {
 	       
-	       pagDTO pagDTO = new pagDTO();		//	instância DTO
+	       PagDTO pagDTO = new PagDTO();		//	instância DTO
 	       
 	       pagDTO.setId(rs.getInt("cliente_id"));		//	substitui ID do pagamento por ID do Cliente	
 	       pagDTO.setData_pag(rs.getDate("data_pag"));
@@ -112,7 +112,7 @@ public List<Object> listar(String dataini, String datafim, int cliente) throws S
 
 // METODO DE INCLUSÃO DE PAGAMENTO
     
- public void incluir(pagDTO pagDTO) throws SQLException {
+ public void incluir(PagDTO pagDTO) throws SQLException {
    	
 // insere a venda:
 
@@ -142,7 +142,7 @@ public List<Object> listar(String dataini, String datafim, int cliente) throws S
    rs.close();      
    
    // somando a dívida ao cliente:
-   clienteDAO cli = new clienteDAO();
+   ClienteDAO cli = new ClienteDAO();
    cli.alterarSaldo(cliente_id,pagDTO.getValor_pago(),2);  // se pagou entao diminue divida
    
 }	    
@@ -150,7 +150,7 @@ public List<Object> listar(String dataini, String datafim, int cliente) throws S
 //*************************************************************************************
 // EXCLUSÃO DE pagamento - só exclui pagamentos cancelados.
 
- public boolean excluir(pagDTO pagDTO) throws SQLException {
+ public boolean excluir(PagDTO pagDTO) throws SQLException {
 	    
  	String ret = VerificaPagCancelado(pagDTO.getId()).trim(); 
  	
@@ -233,7 +233,7 @@ public boolean CancelarPag(int id) throws SQLException {
       rs.close();      
       
       // somando a dívida ao cliente:
-      clienteDAO cli = new clienteDAO();
+      ClienteDAO cli = new ClienteDAO();
       cli.alterarSaldo(cliente_id,valor_pago,1);  // se cancelou pagamento entao aumenta divida
     
       return true;
